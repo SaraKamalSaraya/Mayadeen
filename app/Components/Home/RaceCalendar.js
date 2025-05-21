@@ -162,7 +162,10 @@ export default function RaceCalendarSection() {
               className="eventDetails"
               style={{
                 top: openEventlocation.top || 0,
-                left: openEventlocation.left || 0,
+                left:
+                  openEventlocation.left >= 300
+                    ? `calc(${openEventlocation.left}px - 100px)`
+                    : openEventlocation.left || 0,
               }}
             >
               <div className="head">
