@@ -1,0 +1,18 @@
+.filledButton {
+  border: none;
+  background-color: var(--yellowColor);
+  color: var(--foregroundColor);
+  padding: 5px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.filledButton.sm {
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 12px;
+  gap: 5px;
+}

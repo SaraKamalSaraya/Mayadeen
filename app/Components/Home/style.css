@@ -1,0 +1,343 @@
+.homePageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* -------------------------- Hero Section -------------------------- */
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background-image: url("../../assets/images/hero.jpg");
+  background-size: cover;
+  background-position: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+
+  .content {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
+    padding-bottom: 30px;
+
+    .topSection,
+    .bottomSection {
+      display: flex;
+      align-items: start;
+    }
+
+    .topSection {
+      justify-content: start;
+      flex-direction: column;
+      gap: 20px;
+
+      .title {
+        font-size: 60px;
+      }
+      .desc {
+        font-size: 24px;
+      }
+    }
+
+    .bottomSection {
+      width: 100%;
+      justify-content: space-between;
+      gap: 10px;
+
+      .singleCard {
+        background-color: var(--mainColor50);
+        color: var(--backgroundColor);
+        padding: 20px 30px;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        gap: 5px;
+
+        .title {
+          font-size: 26px;
+        }
+        .desc {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.heroSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* -------------------------- Race Calendar -------------------------- */
+.raceCalendarSection {
+  .sectionTitle {
+    font-size: 40px;
+    color: var(--mainColor);
+    margin-bottom: 30px;
+  }
+
+  .calendarWrapper {
+    display: flex;
+    justify-content: start;
+
+    .cellWrapper {
+      min-height: 90px !important;
+      min-width: 40px !important;
+      padding-bottom: 0px !important;
+      padding-top: 0px !important;
+    }
+
+    .headers {
+      flex: 1;
+      .dateData {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-bottom: 1.5px solid var(--greyColor);
+        .year {
+          font-size: 14px;
+        }
+        .month {
+          font-size: 20px;
+          font-weight: 600;
+        }
+        .arrows {
+          display: flex;
+          align-items: center;
+          justify-content: start;
+          gap: 5px;
+
+          .arrowWrapper {
+            background-color: var(--mainColor);
+            color: var(--backgroundColor);
+            border-radius: 100%;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: max-content;
+            font-size: 9px;
+            cursor: pointer;
+          }
+        }
+      }
+      .events {
+        color: var(--mainColor);
+        padding: 20px !important;
+        font-weight: 600;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .calendar {
+      flex: 5;
+      overflow-x: auto;
+      align-self: flex-end;
+
+      .cellWrapper {
+        display: flex;
+        justify-content: start;
+
+        .smallCell.top {
+          align-self: flex-end;
+          height: 70px;
+          justify-content: center;
+        }
+        .smallCell.bottom {
+          align-self: flex-start;
+          justify-content: start;
+          min-height: 90px;
+        }
+
+        .smallCell {
+          min-width: 70px;
+          height: max-content;
+          border: 1px solid var(--greyColor);
+          padding: 10px 5px;
+          display: inline-flex;
+          align-items: center;
+          flex-direction: column;
+
+          .dayNumber {
+            font-size: 34px;
+            color: var(--mainColor);
+          }
+
+          .isFriday {
+            color: var(--yellowColor);
+          }
+        }
+      }
+
+      .eventsContainer {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        height: 100%;
+        gap: 5px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+
+        .eventIndicator {
+          width: 15px;
+          height: 15px;
+          border: 5px solid var(--mainColor);
+          border-radius: 100%;
+          cursor: pointer;
+        }
+        .eventIndicator:nth-child(2) {
+          border: 5px solid var(--yellowColor);
+        }
+
+        .eventDetails {
+          position: absolute;
+          top: 50%;
+          z-index: 100;
+          background-color: white;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          padding: 15px;
+          width: 300px;
+          max-width: 90vw;
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 50px;
+            color: var(--mainColor);
+
+            svg {
+              cursor: pointer;
+            }
+          }
+          .category {
+            font-size: 10px;
+            color: var(--mainColor);
+          }
+          .dateAndTime,
+          .date,
+          .time {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            font-size: 12px;
+          }
+          .date,
+          .time {
+            gap: 3px;
+          }
+
+          .table .answer {
+            color: var(--mainColor);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* -------------------------- Responsive -------------------------- */
+@media (max-width: 1000px) {
+  .heroSection {
+    .content {
+      padding-top: 60px;
+      padding-bottom: 20px;
+
+      .bottomSection {
+        .singleCard {
+          padding: 15px 20px;
+
+          .title {
+            font-size: 20px;
+          }
+          .desc {
+            font-size: 12px;
+          }
+          .date {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .heroSection {
+    height: 60vh;
+
+    .content {
+      padding-top: 40px;
+
+      .topSection {
+        gap: 15px;
+
+        .title {
+          font-size: 40px;
+        }
+        .desc {
+          font-size: 18px;
+        }
+      }
+
+      .bottomSection {
+        .singleCard {
+          padding: 15px 20px;
+
+          .title {
+            font-size: 18px;
+          }
+          .desc {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .heroSection {
+    .content {
+      .bottomSection {
+        .singleCard {
+          padding: 10px 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .heroSection {
+    height: 70vh;
+
+    .content {
+      .bottomSection {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}

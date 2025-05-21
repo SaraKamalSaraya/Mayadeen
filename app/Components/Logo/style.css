@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Kufam:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap");
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .titleWrapper {
+    /* display: flex;
+  flex-direction: column;
+  width: 100%; */
+    p {
+      color: var(--backgroundColor);
+    }
+    p.title.ar,
+    p.desc {
+      font-family: "Kufam", sans-serif;
+      font-weight: 500;
+    }
+    p.title.en {
+      font-family: "Kanit", sans-serif;
+      font-weight: 500;
+    }
+    p.desc {
+      font-size: 6px;
+    }
+  }
+}
