@@ -15,6 +15,10 @@ export default function RaceCalendarSection() {
   const [selectedMonth, setSelectedMonth] = useState(today.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(today.getFullYear());
   const [openEventIndex, setOpenEventIndex] = useState(null);
+  const [openEventlocation, setOpenEventLocation] = useState({
+    top: null,
+    left: null,
+  });
 
   const handleClickOpenEventIndex = (index) => {
     setOpenEventIndex(openEventIndex === index ? null : index);
@@ -63,6 +67,12 @@ export default function RaceCalendarSection() {
     }
     setSelectedMonth(nextMonth);
     setSelectedYear(nextYear);
+  };
+
+  const getCurrentSelectedEventData = () => {
+    return RaceCalendarData.flatMap((d) => d.events || []).find(
+      (event) => event.id === openEventIndex
+    );
   };
 
   return (
@@ -124,59 +134,16 @@ export default function RaceCalendarSection() {
                       >
                         <div
                           className="eventIndicator"
-                          onClick={() => handleClickOpenEventIndex(event.id)}
+                          onClick={(e) => {
+                            handleClickOpenEventIndex(event.id);
+                            const rect =
+                              e.currentTarget.getBoundingClientRect();
+                            setOpenEventLocation({
+                              top: rect.bottom + window.scrollY,
+                              left: rect.left + window.scrollX,
+                            });
+                          }}
                         ></div>
-
-                        {openEventIndex === event.id && (
-                          <div className="eventDetails">
-                            <div className="head">
-                              {event.name}
-                              <IoClose
-                                onClick={() => setOpenEventIndex(null)}
-                              />
-                            </div>
-                            <p className="category">{event.category}</p>
-                            <div className="dateAndTime">
-                              <div className="date">
-                                <FaRegCalendarAlt />
-                                {event.date}
-                              </div>
-                              <div className="time">
-                                <FaRegClock />
-                                {event.time}
-                              </div>
-                            </div>
-                            <table className="table">
-                              <tbody>
-                                <tr>
-                                  <td>المسافة</td>
-                                  <td className="answer">
-                                    {event.distenation} كم
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>النوع</td>
-                                  <td className="answer">{event.type}</td>
-                                </tr>
-                                <tr>
-                                  <td>العمر</td>
-                                  <td className="answer">{event.age} سنوات</td>
-                                </tr>
-                                <tr>
-                                  <td>الجائزة</td>
-                                  <td className="answer">{event.prize} ر.س</td>
-                                  <td>
-                                    <FilledButton
-                                      title={"تفاصيل"}
-                                      afterIcon={<IoMdArrowRoundBack />}
-                                      size="sm"
-                                    />
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        )}
                       </div>
                     ))}
                   </div>
@@ -186,6 +153,63 @@ export default function RaceCalendarSection() {
           </div>
         </div>
       </div>
+      {openEventIndex &&
+        (() => {
+          const event = getCurrentSelectedEventData();
+
+          return (
+            <div
+              className="eventDetails"
+              style={{
+                top: openEventlocation.top || 0,
+                left: openEventlocation.left || 0,
+              }}
+            >
+              <div className="head">
+                {event.name}
+                <IoClose onClick={() => setOpenEventIndex(null)} />
+              </div>
+              <p className="category">{event.category}</p>
+              <div className="dateAndTime">
+                <div className="date">
+                  <FaRegCalendarAlt />
+                  {event.date}
+                </div>
+                <div className="time">
+                  <FaRegClock />
+                  {event.time}
+                </div>
+              </div>
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>المسافة</td>
+                    <td className="answer">{event.distenation} كم</td>
+                  </tr>
+                  <tr>
+                    <td>النوع</td>
+                    <td className="answer">{event.type}</td>
+                  </tr>
+                  <tr>
+                    <td>العمر</td>
+                    <td className="answer">{event.age} سنوات</td>
+                  </tr>
+                  <tr>
+                    <td>الجائزة</td>
+                    <td className="answer">{event.prize} ر.س</td>
+                    <td>
+                      <FilledButton
+                        title={"تفاصيل"}
+                        afterIcon={<IoMdArrowRoundBack />}
+                        size="sm"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          );
+        })()}
     </div>
   );
 }
